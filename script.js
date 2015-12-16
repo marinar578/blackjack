@@ -13,28 +13,45 @@
     };
 
     //0 = King, 1=Ace, 11=Jack, 12=Queen
+    //will probably not need this
     var cardValue = function(card){
         var value = card%13;
-        var gameValue = card%13;
         switch(value){
             case 0:
                 value = "King";
-                gameValue = 10;
                 break;
             case 1:
                 value = "Ace";
-                gameValue = 11;
                 break;
             case 11:
                 value = "Jack";
-                gameValue = 10;
                 break;
             case 12:
                 value = "Queen";
-                gameValue = 10;
                 break;
         };
         return value;
+    }
+
+    //calculates game value of a card in terms of points
+    //0 = King, 1=Ace, 11=Jack, 12=Queen
+    var calcPoints = function(card){
+        var gameValue = card%13;
+        switch(gameValue){
+            case 0:
+                gameValue = 10;
+                break;
+            case 1:
+                gameValue = 11;
+                break;
+            case 11:
+                gameValue = 10;
+                break;
+            case 12:
+                gameValue = 10;
+                break;
+        };
+        return gameValue;
     }
 
     //0=hearts, 1=diamonds, 2=clubs, 3=spades
@@ -72,11 +89,11 @@
     // work on a shuffled deck and not on the original deck
     var deal = function(){
         var card = deck.pop();
-        console.log(card, cardValue(card) + " of " + cardSuit(card));
-
-        //get the game value of the delt card:
-
+        console.log(calcPoints(card), cardValue(card) + " of " + cardSuit(card));
     }
+
+
+
 
 
 
