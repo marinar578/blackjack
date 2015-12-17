@@ -14,6 +14,10 @@ div.game-space {
     background-color:  green;
 }
 
+.deck{
+
+}
+
 .shoe {
 
 }
@@ -21,6 +25,15 @@ div.game-space {
 .player-hand{
     float: left;
 
+}
+
+.playerCard{
+    width: 30%;
+}
+
+.dealerCard{
+    width:30%;
+    display: inline-block;
 }
 
 .dealer-hand{
