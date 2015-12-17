@@ -3,7 +3,7 @@
 // $(function () {
     console.log("doc ready");
 
-    var deck = [];
+    var initialDeck = [];
 
     //the following variables keep track of the amount  of points the player and dealer have
     var playerPoints = 0;
@@ -11,7 +11,7 @@
 
     //populates the original deck array
     for(var i=0; i<52; i++){
-        deck.push(i)
+        initialDeck.push(i)
     };
 
     //0 = King, 1=Ace, 11=Jack, 12=Queen
@@ -77,7 +77,7 @@
     }
 
     //shuffles deck
-    var shuffleDeck = function () {
+    var shuffleDeck = function(deck) {
         for (var i = deck.length - 1; i > 0; i--) {
             var j = Math.round(Math.random() * i );
             var iHolder = deck[i];
@@ -89,8 +89,8 @@
 
     //deals cards from shuffled deck and returns array of [card point value, card name, card suit]
     var deal = function(player){
-        shuffleDeck();
-        var card = deck.pop();
+        // shuffleDeck(initialDeck);
+        var card = initialDeck.pop();
 
         if(player === "player"){
                 //changes ace value to 1 if necessary and adds appropriate amount to playerPoints
@@ -117,7 +117,6 @@
                 $('.dealer-hand').append(dealerCard);
                 dealerCard.text(cardValue(card) + " of " + cardSuit(card));
         };
-
         return [calcPoints(card), cardValue(card), cardSuit(card)];
     }
 
@@ -125,6 +124,12 @@
     var displayScore = function(){
         $('.player-score').text("Player score: " + playerPoints);
         $('.dealer-score').text("Dealer score: " + dealerPoints);
+    }
+    //removes score display
+    var removeScore = function(){
+        $('.player-score').text('');
+        $('.dealer-score').text('');
+        $('.end-message').text('');
     }
 
     //hides hit and stand buttons
@@ -142,15 +147,37 @@
      }
 
      //start the game with the play button, but hide the hit and stand buttons initially
-    hideButtons();
-    $('.play').click(initialDeal);
+    var newRound = function(){
+        hideButtons();
+        shuffleDeck(initialDeck);
+        $('.play').show().click(initialDeal);
+        console.log("game start")
+    }
+    newRound();
+
+    var clearTable = function(){
+        playerPoints = 0;
+        dealerPoints = 0;
+        $('.player-card').remove();
+        $('.dealer-card').remove();
+        removeScore();
+    }
+
+    var endOfGame = function(){
+        displayScore();
+        var playAgain = confirm("new round?");
+        if(playAgain){
+            clearTable();
+            newRound();
+        };
+    };
 
     $('.hit').click(function(){
             deal("player");
             if(playerPoints>21){
                 hideButtons();
-                alert("Player bust, dealer wins =/")
-                displayScore();
+                $('.end-message').text("Player bust, dealer wins =/")
+                endOfGame();
             };
     });
 
@@ -158,19 +185,23 @@
         while(dealerPoints<17){
             deal("dealer");
         };
+
         if(dealerPoints>21){
-            alert("Dealer bust, you win!")
-            displayScore();
+            $('.end-message').text("Dealer bust, you win!");
+            endOfGame();
         } else if(dealerPoints<playerPoints){
-            alert("You win!!");
-            displayScore();
+            $('.end-message').text("You win!!");
+            endOfGame();
         } else if (dealerPoints>playerPoints){
-            alert("Dealer wins =/");
-            displayScore();
+            $('.end-message').text("Dealer wins =/");
+            endOfGame();
         } else {
-            alert("Tie!");
-            displayScore();
+            $('.end-message').text("Tie!");
+            endOfGame();
         };
+
+
+
     });
 
 
