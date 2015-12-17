@@ -93,44 +93,51 @@
         var card = deck.pop();
 
         if(player === "player"){
-            //adds points to playerPoints, creates new player-card div, adds text
-            //to new div describing card that was dealt and shows player score
-            playerPoints+=calcPoints(card);
-            var playerCard = $('<div class="player-card">');
-            $('.player-hand').append(playerCard);
-            playerCard.text(cardValue(card) + " of " + cardSuit(card));
-             
-        } else if (player === "dealer"){
-            //adds to dealerPoints, creates new dealer-card div, adds text to it 
-            //and shows dealer score
-            dealerPoints+=calcPoints(card);
-            var dealerCard = $('<div class="dealer-card">');
-            $('.dealer-hand').append(dealerCard);
-            dealerCard.text(cardValue(card) + " of " + cardSuit(card));
+                //changes ace value to 1 if necessary and adds appropriate amount to playerPoints
+                if (calcPoints(card)===11 && (playerPoints+11>21)){
+                    playerPoints+=1;
+                } else {
+                    playerPoints+=calcPoints(card);
+                }
 
+                //creates new player-card div, adds text to new div describing card that was dealt and shows player score
+                var playerCard = $('<div class="player-card">');
+                $('.player-hand').append(playerCard);
+                playerCard.text(cardValue(card) + " of " + cardSuit(card));             
+        } else if (player === "dealer"){
+                //changes ace value to 1 if necessary and adds appropriate amount to dealerPoints
+                if (calcPoints(card)===11 && (dealerPoints+11>21)){
+                    dealerPoints+=1;
+                } else {
+                    dealerPoints+=calcPoints(card);
+                };
+
+                //creates new dealer-card div, adds text to it and shows dealer score
+                var dealerCard = $('<div class="dealer-card">');
+                $('.dealer-hand').append(dealerCard);
+                dealerCard.text(cardValue(card) + " of " + cardSuit(card));
         };
 
         return [calcPoints(card), cardValue(card), cardSuit(card)];
     }
 
+    //displays player and dealer points
     var displayScore = function(){
         $('.player-score').text("Player score: " + playerPoints);
         $('.dealer-score').text("Dealer score: " + dealerPoints);
     }
 
+    //hides hit and stand buttons
     var hideButtons = function(){
         $('.hit').hide();
         $('.stand').hide();
     }
 
     //serve out first four cards of the game
-      var initialDeal = function(){
+    var initialDeal = function(){
         deal("dealer"); deal("player"); deal("dealer"); deal("player");        
-        //shows the hit button and deals cards to player
         $('.hit').show()
-        //shows the stand button and deals cards to dealer
         $('.stand').show()
-        //hides play button
         $('.play').hide();
      }
 
@@ -140,21 +147,17 @@
 
     $('.hit').click(function(){
             deal("player");
-
             if(playerPoints>21){
                 hideButtons();
                 alert("Player bust, dealer wins =/")
                 displayScore();
             };
-
     });
 
     $('.stand').click(function(){
-
         while(dealerPoints<17){
             deal("dealer");
         };
-
         if(dealerPoints>21){
             alert("Dealer bust, you win!")
             displayScore();
@@ -168,7 +171,6 @@
             alert("Tie!");
             displayScore();
         };
-
     });
 
 
