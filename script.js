@@ -87,47 +87,89 @@
         return deck;
     }
 
-    //deals cards from deck. shuffleDeck() must be called first for this to 
-    // work on a shuffled deck and not on the original deck
+    //deals cards from shuffled deck and returns array of [card point value, card name, card suit]
     var deal = function(player){
         shuffleDeck();
         var card = deck.pop();
+
         if(player === "player"){
+            //adds points to playerPoints, creates new player-card div, adds text
+            //to new div describing card that was dealt and shows player score
             playerPoints+=calcPoints(card);
             var playerCard = $('<div class="player-card">');
             $('.player-hand').append(playerCard);
             playerCard.text(cardValue(card) + " of " + cardSuit(card));
-             $('.player-score').text("Player score: " + playerPoints);
+             
         } else if (player === "dealer"){
+            //adds to dealerPoints, creates new dealer-card div, adds text to it 
+            //and shows dealer score
             dealerPoints+=calcPoints(card);
             var dealerCard = $('<div class="dealer-card">');
             $('.dealer-hand').append(dealerCard);
             dealerCard.text(cardValue(card) + " of " + cardSuit(card));
-             $('.dealer-score').text("Dealer score: " + dealerPoints);
+
         };
 
         return [calcPoints(card), cardValue(card), cardSuit(card)];
     }
 
+    var displayScore = function(){
+        $('.player-score').text("Player score: " + playerPoints);
+        $('.dealer-score').text("Dealer score: " + dealerPoints);
+    }
+
+    var hideButtons = function(){
+        $('.hit').hide();
+        $('.stand').hide();
+    }
+
     //serve out first four cards of the game
       var initialDeal = function(){
-        deal("dealer"); deal("player"); deal("dealer"); deal("player");
-        
+        deal("dealer"); deal("player"); deal("dealer"); deal("player");        
         //shows the hit button and deals cards to player
-        $('.hit').show().click(function(){
-            deal("player");
-        });
-
+        $('.hit').show()
         //shows the stand button and deals cards to dealer
-        $('.stand').show().click(function(){
-            deal("dealer");
-        });
+        $('.stand').show()
+        //hides play button
+        $('.play').hide();
      }
 
      //start the game with the play button, but hide the hit and stand buttons initially
-    $('.hit').hide();
-    $('.stand').hide();
+    hideButtons();
     $('.play').click(initialDeal);
+
+    $('.hit').click(function(){
+            deal("player");
+
+            if(playerPoints>21){
+                hideButtons();
+                alert("Player bust, dealer wins =/")
+                displayScore();
+            };
+
+    });
+
+    $('.stand').click(function(){
+
+        while(dealerPoints<17){
+            deal("dealer");
+        };
+
+        if(dealerPoints>21){
+            alert("Dealer bust, you win!")
+            displayScore();
+        } else if(dealerPoints<playerPoints){
+            alert("You win!!");
+            displayScore();
+        } else if (dealerPoints>playerPoints){
+            alert("Dealer wins =/");
+            displayScore();
+        } else {
+            alert("Tie!");
+            displayScore();
+        };
+
+    });
 
 
 
