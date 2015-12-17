@@ -5,8 +5,8 @@ div.container{
 }
 
 div.game-space {
-    height: 600px;
-    width: 900px;
+    height: 300px;
+    width: 600px;
     background-color:  green;
 }
 
@@ -15,10 +15,13 @@ div.game-space {
 }
 
 .player-hand{
+    float: left;
 
 }
 
 .dealer-hand{
+    margin-left: 20px;
+    padding-left: 20px;
 
 }
 

@@ -4,8 +4,10 @@
     console.log("doc ready");
 
     var deck = [];
-    var playerAmount = 0;
-    var dealerAmount = 0;
+
+    //the following variables keep track of the amount  of points the player and dealer have
+    var playerPoints = 0;
+    var dealerPoints = 0;
 
     //populates the original deck array
     for(var i=0; i<52; i++){
@@ -33,25 +35,25 @@
         return value;
     }
 
-    //calculates game value of a card in terms of points
-    //0 = King, 1=Ace, 11=Jack, 12=Queen
+    //calculates point value of a card
+    //0 = King, 1=Ace, 11=Jack, 12=Queen, all other card values = their numbers
     var calcPoints = function(card){
-        var gameValue = card%13;
-        switch(gameValue){
+        var pointValue = card%13;
+        switch(pointValue){
             case 0:
-                gameValue = 10;
+                pointValue = 10;
                 break;
             case 1:
-                gameValue = 11;
+                pointValue = 11;
                 break;
             case 11:
-                gameValue = 10;
+                pointValue = 10;
                 break;
             case 12:
-                gameValue = 10;
+                pointValue = 10;
                 break;
         };
-        return gameValue;
+        return pointValue;
     }
 
     //0=hearts, 1=diamonds, 2=clubs, 3=spades
@@ -87,90 +89,56 @@
 
     //deals cards from deck. shuffleDeck() must be called first for this to 
     // work on a shuffled deck and not on the original deck
-    var deal = function(){
+    var deal = function(player){
+        shuffleDeck();
         var card = deck.pop();
-        console.log(calcPoints(card), cardValue(card) + " of " + cardSuit(card));
+        if(player === "player"){
+            playerPoints+=calcPoints(card);
+            var playerCard = $('<div class="player-card">');
+            $('.player-hand').append(playerCard);
+            playerCard.text(cardValue(card) + " of " + cardSuit(card));
+             $('.player-score').text("Player score: " + playerPoints);
+        } else if (player === "dealer"){
+            dealerPoints+=calcPoints(card);
+            var dealerCard = $('<div class="dealer-card">');
+            $('.dealer-hand').append(dealerCard);
+            dealerCard.text(cardValue(card) + " of " + cardSuit(card));
+             $('.dealer-score').text("Dealer score: " + dealerPoints);
+        };
+
+        return [calcPoints(card), cardValue(card), cardSuit(card)];
     }
 
-
-
-
-
-
-
-
-
-
-    // // following function finds the card's name from the deck
-    // //unnecessary in actual code, delete this before submitting
-    // //0=hearts, 1=diamonds, 2=clubs, 3=spades
-    // var displayCardName = function(i){
+    //serve out first four cards of the game
+      var initialDeal = function(){
+        deal("dealer"); deal("player"); deal("dealer"); deal("player");
         
+        //shows the hit button and deals cards to player
+        $('.hit').show().click(function(){
+            deal("player");
+        });
 
-    //     var cardName = deck.map(function(card){
-    //         var cardSuit = Math.floor(card / 13);
-    //         switch(cardSuit){
-    //             case 0:
-    //                 cardSuit = "hearts";
-    //                 break;
-    //             case 1:
-    //                 cardSuit = "diamonds";
-    //                 break;
-    //             case 2:
-    //                 cardSuit = "clubs";
-    //                 break;
-    //             case 3:
-    //                 cardSuit = "spaces";
-    //                 break;
-    //         }
+        //shows the stand button and deals cards to dealer
+        $('.stand').show().click(function(){
+            deal("dealer");
+        });
+     }
 
-    //         var cardValue = card%13;
-    //         switch (cardValue) {
-    //             case 0:
-    //                 cardValue = "2";
-    //                 break;
-    //             case 1:
-    //                 cardValue = "3";
-    //                 break;
-    //             case 2:
-    //                 cardValue= "4";
-    //                 break;
-    //             case 3:
-    //                 cardValue = "5";
-    //                 break;
-    //             case 4:
-    //                 cardValue = "6";
-    //                 break;
-    //             case 5:
-    //                 cardValue = "7";
-    //                 break;
-    //             case 6:
-    //                 cardValue = "8";
-    //                 break;
-    //             case 7:
-    //                 cardValue= "9";
-    //                 break;
-    //             case 8:
-    //                 cardValue = "10";
-    //                 break;
-    //             case 9:
-    //                 cardValue = "Jack";
-    //                 break;
-    //             case 10:
-    //                 cardValue = "Queen";
-    //                 break;
-    //             case 11:
-    //                 cardValue= "King";
-    //                 break;
-    //             case 12:
-    //                 cardValue = "Ace";
-    //                 break;
-    //         }
-    //         return cardValue + " of " + cardSuit;
-    //     });
-        
-    //     return cardName      
-    // };
+     //start the game with the play button, but hide the hit and stand buttons initially
+    $('.hit').hide();
+    $('.stand').hide();
+    $('.play').click(initialDeal);
+
+
+
+
+
+
+
+
+
+
+
 
 
     
