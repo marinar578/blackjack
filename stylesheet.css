@@ -4,44 +4,84 @@
   clear: both;
 }
 
-div.container{
+body{
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    left: 10%;
+    background-color:  #111;
+    color: yellow;
+    /*    overflow: hidden;*/
+    /*    font-family:  "American Typewriter", serif;*/
+    font-family:  "Savoye LET", serif;
+    font-size: 40pt;
+}
 
+div.container{
+    border-bottom: 8px solid silver;
+}
+
+.header{
+    padding: 10px 10px 0px 50px;
+    border-bottom: 8px solid silver;
+    font-size: 100pt;
 }
 
 div.game-space {
-    height: 300px;
-    width: 600px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    height: ;
     background-color:  green;
 }
 
-.deck{
-
+.decks{
+    position: relative;
+    width: 80%;
+    left: 10%;
 }
 
-.shoe {
 
+
+.play{
 }
 
-.player-hand{
-    float: left;
+.player-hand{}
 
+.player-hand p{
+    float: right;
 }
 
-.playerCard{
-    width: 30%;
-}
-
-.dealerCard{
-    width:30%;
-    display: inline-block;
+.player-card{
+    width: 65px;
+    float: right;
 }
 
 .dealer-hand{
-    float: right;
+}
 
+.dealer-hand p{
+    float: left;
+}
+
+.dealer-card{
+    width: 65px;
+/*    display: inline-block;*/
 }
 
 .scores{
+    text-align: center;
+    font-size: 20pt;
+}
 
+.score.end-message{
+    display: inline-block;
+}
+
+.score.player-score{
+    display: inline-block;
+}
+
+.score.player-score{
+    display: inline-block;
 }
 

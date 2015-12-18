@@ -114,12 +114,13 @@
                     playerPoints+=calcPoints(card);
                 }
 
-                //creates new player-card div, adds text to new div describing card that was dealt and shows player score
-                var playerCardTxt = $('<div class="player-card">');
-                $('.player-hand').append(playerCardTxt);
-                playerCardTxt.text(cardValue(card) + " of " + cardSuit(card));     
+                // //creates new player-card div, adds text to new div describing card that was dealt and shows player score
+                // var playerCardTxt = $('<div class="playerCard">');
+                // $('.player-hand').append(playerCardTxt);
+                // playerCardTxt.text(cardValue(card) + " of " + cardSuit(card));     
 
-                var playerCard = $('<img class="playerCard">');
+                //creates new player-card img of dealt card
+                var playerCard = $('<img class="player-card">');
                 $('.player-hand').append(playerCard);
                 playerCard.attr('src', sortedImages[card]);
 
@@ -135,12 +136,13 @@
                     dealerPoints+=calcPoints(card);
                 };
 
-                //creates new dealer-card div, adds text to it and shows dealer score
-                var dealerCardTxt = $('<div class="dealer-card">');
-                $('.dealer-hand').append(dealerCardTxt);
-                dealerCardTxt.text(cardValue(card) + " of " + cardSuit(card));
+                // //creates new dealer-card div, adds text to it and shows dealer score
+                // var dealerCardTxt = $('<div class="dealerCard">');
+                // $('.dealer-hand').append(dealerCardTxt);
+                // dealerCardTxt.text(cardValue(card) + " of " + cardSuit(card));
 
-                var dealerCard = $('<img class="dealerCard">');
+                //creates new dealer-card img of dealt card
+                var dealerCard = $('<img class="dealer-card">');
                 $('.dealer-hand').append(dealerCard);
                 dealerCard.attr('src', sortedImages[card]);
 
@@ -177,12 +179,11 @@
         $('.play').hide();
      }
 
-     //start the game with the play button, but hide the hit and stand buttons initially
+    //start the game with the play button, but hide the hit and stand buttons initially
     var playGame = function(){
         hideButtons();
         shuffleDeck(initialDeck);
         $('.play').show().click(initialDeal);
-        console.log("game start")
     }
     playGame();
 
@@ -194,6 +195,7 @@
     //     removeScore();
     // }
 
+    //hides buttons and displays score at end of the game - used in the click functions below
     var endOfGame = function(){
         hideButtons();
         displayScore();
@@ -204,13 +206,19 @@
         // };
     };
 
+
+
+
     $('.hit').click(function(){
             deal("player");
             if(playerPoints>21){
-                $('.end-message').text("Player bust, dealer wins =/")
+                $('.end-message').text("Player bust, dealer wins")
                 endOfGame();
             };
     });
+
+
+
 
     $('.stand').click(function(){
         while(dealerPoints<17){
@@ -224,7 +232,7 @@
             $('.end-message').text("You win!!");
             endOfGame();
         } else if (dealerPoints>playerPoints){
-            $('.end-message').text("Dealer wins =/");
+            $('.end-message').text("Dealer wins");
             endOfGame();
         } else {
             $('.end-message').text("Tie!");

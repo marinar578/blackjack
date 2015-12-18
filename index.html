@@ -8,50 +8,44 @@
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
 
-<!-- add header info here -->
-    <div class="header">
-    header
-    </div>
+    <!-- add header info here -->
+        <div class="header">
+        BlackJack
+        </div>
 
-<!-- game space divs -->
-    <div class="game-space">
-        <button class="play">Play</button>
+    <!-- game space divs -->
+        <div class="game-space">
+            <button class="play">Deal</button>
 
-        <div class="decks">
-            <div class="shoe">
-            Deck of cards<br><br><br>
+            <div class="decks">
+
+                <div class="dealer-hand clearfix">
+                    <p class="clearfix">Dealer hand</p>
+                    <!-- append more dealer cards here, if necessary -->
+                </div>
+
+                <div class="player-hand clearfix">
+                    <p class="clearfix">Player hand</p>
+                    <!-- append more player cards here, if necessary -->
+                </div>
+
             </div>
 
-            <div class="player-hand clearfix">
-            Player hand
+            <button class="hit">Hit</button>
+            <button class="stand">Stand</button>
 
-                <!-- append more player cards here, if necessary -->
-            </div>
-
-            <div class="dealer-hand clearfix">
-            Dealer hand
-
-                <!-- append more dealer cards here, if necessary -->
+            <div class="scores">
+                <div class="end-message"></div>
+                <div class="player-score"></div>
+                <div class="dealer-score"></div>
             </div>
         </div>
 
-        <button class="hit">Hit</button>
-        <button class="stand">Stand</button>
-    </div>
-
-    <div class="scores">
-        <div class="end-message"></div>
-        <div class="player-score"></div>
-        <div class="dealer-score"></div>
-    </div>
-
-</div>
 
 
-<!-- add footer here -->
-    
+    </div>    
 </body>
 </html>
   <script src="jquery-2.1.4.js"></script>
