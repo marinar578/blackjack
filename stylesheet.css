@@ -18,12 +18,12 @@ body{
 }
 
 div.container{
-    border-bottom: 8px solid silver;
+   /* border-bottom: 8px solid silver;*/
 }
 
 .header{
     padding: 10px 10px 0px 50px;
-    border-bottom: 8px solid silver;
+    /*border-bottom: 8px solid silver;*/
     font-size: 100pt;
 }
 
@@ -31,13 +31,13 @@ div.game-space {
     padding-top: 50px;
     padding-bottom: 50px;
     background-color:  green;
-    background: radial-gradient(ellipse, green, navy);
+    background: radial-gradient(circle, green, #111);
 }
 
 .decks{
     position: relative;
     width: 80%;
-    height: 340px;
+    height: 300px;
     left: 10%;
 }
 
@@ -66,7 +66,10 @@ div.game-space {
 }
 
 .play:hover{
-    text-shadow: 0 0 3px red;
+    color: black;
+    font-weight: bold;
+    font-size: 42pt;
+    text-shadow: 0 0 3px yellow;
 }
 
 .player-hand{}
@@ -109,8 +112,12 @@ div.game-space {
 }
 
 .btn:hover{
-    background-color: black;
-    color: gold;
+/*    background-color: black;
+    color: gold;*/
+    color: black;
+    text-shadow: 0 0 3px yellow;
+    font-weight: bold;
+    font-size: 21pt;
 }
 
 .hit{
@@ -119,6 +126,8 @@ div.game-space {
 
 .stand{
     position: relative;
+    margin-left: 20px;
+
 }
 
 .scores{
