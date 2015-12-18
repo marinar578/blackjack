@@ -30,13 +30,13 @@ div.container{
 div.game-space {
     padding-top: 20px;
     padding-bottom: 50px;
-    height: ;
     background-color:  green;
 }
 
 .decks{
     position: relative;
     width: 80%;
+    height: 340px;
     left: 10%;
 }
 
@@ -48,7 +48,10 @@ div.game-space {
 .player-hand{}
 
 .player-hand p{
+    position: relative;
+    top: -15px;
     float: right;
+    padding: 5px;
 }
 
 .player-card{
@@ -60,12 +63,46 @@ div.game-space {
 }
 
 .dealer-hand p{
+    position: relative;
+    top: -10px;
     float: left;
+    padding-right: 15px;
 }
 
 .dealer-card{
     width: 65px;
 /*    display: inline-block;*/
+}
+
+.btn{
+    position: relative;
+    width: 30%;
+    left:50%;
+    padding: 20px 20px 0px 20px;
+/*    border: dotted 1pt yellow;*/
+    border-radius: 10px;
+    font-size: 20pt;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:hover{
+    background-color: gold;
+    color: green;
+    opacity: .9;
+}
+
+.hit{
+    position: relative;
+
+/*    left: 20%;
+    top: 20%;*/
+
+}
+
+.stand{
+    position: relative;
+/*    left: 40%;*/
 }
 
 .scores{
@@ -85,3 +122,19 @@ div.game-space {
     display: inline-block;
 }
 
+
+@keyframes bounceIn{
+    0%{
+        transform: scale(0);
+        opacity: 0;
+
+    }
+    50%{
+        transform: scale(3);
+        opacity: 1;      
+
+    }
+    100%{
+        transform: scale(1);
+    }
+}

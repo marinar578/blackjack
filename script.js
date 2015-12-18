@@ -212,7 +212,7 @@
     $('.hit').click(function(){
             deal("player");
             if(playerPoints>21){
-                $('.end-message').text("Player bust, dealer wins")
+                $('.end-message').text("Player busts, dealer wins")
                 endOfGame();
             };
     });
@@ -226,7 +226,7 @@
         };
 
         if(dealerPoints>21){
-            $('.end-message').text("Dealer bust, you win!");
+            $('.end-message').text("Dealer busts, you win!");
             endOfGame();
         } else if(dealerPoints<playerPoints){
             $('.end-message').text("You win!!");
