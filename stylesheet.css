@@ -4,53 +4,42 @@
   clear: both;
 }
 
-body{
-    position: absolute;
-    height: 80%;
-    width: 80%;
-    left: 10%;
-    background-color:  #111;
-    color: yellow;
-    /*    overflow: hidden;*/
-    /*    font-family:  "American Typewriter", serif;*/
-    font-family:  "Savoye LET", serif;
-    font-size: 40pt;
+html {
+    height: 100%;
 }
 
-div.container{
-   /* border-bottom: 8px solid silver;*/
+body{
+/*    height: 80%;
+    width: 80%;*/
+    left: 10%;
+    background-color:  green;
+    color: yellow;
+    font-family:  "Savoye LET", "Lucida Bright", serif;
+    font-size: 40pt;
+    background-image: radial-gradient(ellipse , green, #111111);
 }
 
 .header{
+    margin-left: 10px;
     padding: 10px 10px 0px 50px;
-    /*border-bottom: 8px solid silver;*/
-    font-size: 100pt;
+    font-size: 90pt;
 }
 
 div.game-space {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    background-color:  green;
-    background: radial-gradient(circle, green, #111);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-left:auto;
+    margin-right:auto;
+/*    padding-top: 50px;
+    padding-bottom: 50px;*/
 }
 
 .decks{
     position: relative;
     width: 80%;
-    height: 300px;
+    height: 275px;
     left: 10%;
-}
-
-
-.play-area {
-    position: relative;
-    width: 80%;
-    height: 340px;
-    padding-top: 5px;
-    text-align: center;
-    margin-right:  auto;
-    margin-left: auto;
-    border-radius: 10px;
 }
 
 .play {
@@ -67,12 +56,8 @@ div.game-space {
 
 .play:hover{
     color: black;
-    font-weight: bold;
-    font-size: 42pt;
     text-shadow: 0 0 3px yellow;
 }
-
-.player-hand{}
 
 .player-hand p{
     position: relative;
@@ -84,9 +69,6 @@ div.game-space {
 .player-card{
     width: 65px;
     float: right;
-}
-
-.dealer-hand{
 }
 
 .dealer-hand p{
@@ -112,12 +94,8 @@ div.game-space {
 }
 
 .btn:hover{
-/*    background-color: black;
-    color: gold;*/
     color: black;
     text-shadow: 0 0 3px yellow;
-    font-weight: bold;
-    font-size: 21pt;
 }
 
 .hit{
@@ -127,23 +105,37 @@ div.game-space {
 .stand{
     position: relative;
     margin-left: 20px;
-
 }
 
-.scores{
-    text-align: center;
+.scores {
+    width: 50%;
+    margin-right:auto;
+    margin-left:auto;
+    float:left;
+}
+
+.scores *{
+    width: 50%;
+    margin-left:auto;
+    margin-right: auto;
     font-size: 20pt;
+    margin: 0 25px;
+    text-align: center;
 }
 
-.score.end-message{
-    display: inline-block;
+
+.play-again{
+    position: relative;
+    width: 20%;
+    margin-right:  auto;
+    margin-left: auto;
+    margin-bottom: 0;
+    margin-top: 0;
+    cursor: pointer;
 }
 
-.score.player-score{
-    display: inline-block;
-}
-
-.score.player-score{
-    display: inline-block;
+.play-again:hover{
+    color: black;
+    text-shadow: 0 0 3px yellow;
 }
 

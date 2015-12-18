@@ -13,6 +13,10 @@
     var playerPoints = 0;
     var dealerPoints = 0;
 
+    var playerWins = 0;
+    var dealerWins = 0;
+    var ties = 0;
+
     //use these to keep track of each player's hand as cards are dealt (for ace conditionals)
     var playerHand = [];
     var dealerHand = [];
@@ -173,53 +177,63 @@
         $('#0').attr('src', 'images/card_back.svg'); 
         deal("player"); deal("dealer"); deal("player");        
         $('.decks').show();
-        $('.hit').show()
-        $('.stand').show()
-        $('.play-area').remove();
+        $('.hit').show();
+        $('.stand').show();
+        $('.play').hide();
      }
 
     //start the game with the play button, but hide the hit and stand buttons initially
+    hideButtons();
+    $('.decks').hide();
+    $('.play-again').hide();
     var playGame = function(){
-        hideButtons();
         shuffleDeck(initialDeck);
-        $('.play').show().click(initialDeal);
-        $('.decks').hide();
+        $('.play').show();
+        $('.play-again').hide();
+        console.log("player wins: "+playerWins, "dealer wins: "+dealerWins, "ties: "+ties);
     }
-    playGame();
 
-    // var clearTable = function(){
-    //     playerPoints = 0;
-    //     dealerPoints = 0;
-    //     $('.player-card').remove();
-    //     $('.dealer-card').remove();
-    //     removeScore();
-    // }
+
+    $('.play').click(initialDeal);
+
+
+    var clearTable = function(){
+        playerPoints = 0;
+        dealerPoints = 0;
+        hideButtons();
+        $('.decks').hide();
+        $('.player-card').remove();
+        $('.dealer-card').remove();
+        removeScore();
+    }
+
 
     //hides buttons and displays score at end of the game - used in the click functions below
     var endOfGame = function(){
         hideButtons();
         displayScore();
         $('#0').attr('src', sortedImages[dealerHand[0]]); 
-        // var playAgain = confirm("new round?");
-        // if(playAgain){
-        //     clearTable();
-        //     newRound();
-        // };
+        $('.play-again').show().click(function(){
+            clearTable();
+            dealerHand = [];
+            playGame();
+        })
+
     };
 
 
-
+    if (playerPoints===21){
+        $('.hit').hide();
+    };
 
     $('.hit').click(function(){
             deal("player");
             if(playerPoints>21){
-                $('.end-message').text("Player busts, dealer wins")
+                $('.end-message').text("Player busts, dealer wins");
+                dealerWins+=1;
                 endOfGame();
-            } else if (playerPoints===21){
-                $('.hit').hide();
-            };
+            }
     });
-
 
 
 
@@ -230,21 +244,26 @@
 
         if(dealerPoints>21){
             $('.end-message').text("Dealer busts, you win!");
+            playerWins+=1;
             endOfGame();
         } else if(dealerPoints<playerPoints){
             $('.end-message').text("You win!!");
+            playerWins+=1;
             endOfGame();
         } else if (dealerPoints>playerPoints){
             $('.end-message').text("Dealer wins");
+            dealerWins+=1;
             endOfGame();
         } else {
             $('.end-message').text("Tie!");
+            ties+=1;
             endOfGame();
         };
 
 
 
     });
+
 
 
 

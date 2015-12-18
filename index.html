@@ -9,8 +9,6 @@
 </head>
 <body>
 
-    <div class="container">
-
     <!-- add header info here -->
         <div class="header">
         BlackJack
@@ -18,35 +16,30 @@
 
     <!-- game space divs -->
         <div class="game-space">
+                <p class="play">Deal</p>
 
-            <div class="play-area"><p class="play">Deal</p></div>
+                <div class="decks">
+                        <div class="hand dealer-hand clearfix">
+                                <p class="clearfix">Dealer hand</p>
+                                <!-- append more dealer cards here, if necessary -->
+                        </div>
 
-            <div class="decks">
-
-                <div class="hand dealer-hand clearfix">
-                    <p class="clearfix">Dealer hand</p>
-                    <!-- append more dealer cards here, if necessary -->
+                        <div class="hand player-hand clearfix">
+                                <p class="clearfix">Player hand</p>
+                                <!-- append more player cards here, if necessary -->
+                        </div>
                 </div>
 
-                <div class="hand player-hand clearfix">
-                    <p class="clearfix">Player hand</p>
-                    <!-- append more player cards here, if necessary -->
+                <span class="btn hit">Hit</span>
+                <span class="btn stand">Stand</span>
+
+               <p class="play-again">Play Again</p>
+
+                <div class="scores clearfix">
+                        <p class="end-message"></p>
+                        <p class="player-score"></p>
+                        <p class="dealer-score"></p>
                 </div>
-
-            </div>
-
-            <span class="btn hit">Hit</span>
-            <span class="btn stand">Stand</span>
-
-            <div class="scores">
-                <div class="end-message"></div>
-                <div class="player-score"></div>
-                <div class="dealer-score"></div>
-            </div>
-        </div>
-
-
-
     </div>    
 </body>
 </html>
