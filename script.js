@@ -22,26 +22,26 @@
         initialDeck.push(i)
     };
 
-    //0 = King, 1=Ace, 11=Jack, 12=Queen
-    //will probably not need this
-    var cardValue = function(card){
-        var value = card%13;
-        switch(value){
-            case 0:
-                value = "King";
-                break;
-            case 1:
-                value = "Ace";
-                break;
-            case 11:
-                value = "Jack";
-                break;
-            case 12:
-                value = "Queen";
-                break;
-        };
-        return value;
-    }
+    // //0 = King, 1=Ace, 11=Jack, 12=Queen
+    // //will probably not need this
+    // var cardValue = function(card){
+    //     var value = card%13;
+    //     switch(value){
+    //         case 0:
+    //             value = "King";
+    //             break;
+    //         case 1:
+    //             value = "Ace";
+    //             break;
+    //         case 11:
+    //             value = "Jack";
+    //             break;
+    //         case 12:
+    //             value = "Queen";
+    //             break;
+    //     };
+    //     return value;
+    // }
 
     //calculates point value of a card
     //0 = King, 1=Ace, 11=Jack, 12=Queen, all other card values = their numbers
@@ -83,10 +83,6 @@
         }
         return suit;
     }
-
-    // initialDeck.forEach(function(el){
-    //     console.log(el, cardValue(el) + " of " + cardSuit(el));
-    // })
 
     //shuffles deck
     var shuffleDeck = function(deck) {
@@ -142,15 +138,15 @@
                 // dealerCardTxt.text(cardValue(card) + " of " + cardSuit(card));
 
                 //creates new dealer-card img of dealt card
-                var dealerCard = $('<img class="dealer-card">');
+                dealerHand.push(card);
+                var dealerCard = $('<img class="dealer-card" id="'+dealerHand.indexOf(card)+'">');
                 $('.dealer-hand').append(dealerCard);
                 dealerCard.attr('src', sortedImages[card]);
 
-                dealerHand.push(card);
+               
                 
         };
 
-        return [calcPoints(card), cardValue(card), cardSuit(card)];
     }
 
     //displays player and dealer points
@@ -173,7 +169,9 @@
 
     //serve out first four cards of the game
     var initialDeal = function(){
-        deal("dealer"); deal("player"); deal("dealer"); deal("player");        
+        deal("dealer");
+        $('#0').attr('src', 'images/card_back.svg'); 
+        deal("player"); deal("dealer"); deal("player");        
         $('.decks').show();
         $('.hit').show()
         $('.stand').show()
@@ -201,6 +199,7 @@
     var endOfGame = function(){
         hideButtons();
         displayScore();
+        $('#0').attr('src', sortedImages[dealerHand[0]]); 
         // var playAgain = confirm("new round?");
         // if(playAgain){
         //     clearTable();
@@ -216,6 +215,8 @@
             if(playerPoints>21){
                 $('.end-message').text("Player busts, dealer wins")
                 endOfGame();
+            } else if (playerPoints===21){
+                $('.hit').hide();
             };
     });
 
