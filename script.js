@@ -145,9 +145,7 @@
                 dealerHand.push(card);
                 var dealerCard = $('<img class="dealer-card" id="'+dealerHand.indexOf(card)+'">');
                 $('.dealer-hand').append(dealerCard);
-                dealerCard.attr('src', sortedImages[card]);
-
-               
+                dealerCard.attr('src', sortedImages[card]);             
                 
         };
 
@@ -157,12 +155,18 @@
     var displayScore = function(){
         $('.player-score').text("Player score: " + playerPoints);
         $('.dealer-score').text("Dealer score: " + dealerPoints);
+        $('.player-wins').text("Player wins: "+playerWins);
+        $('.dealer-wins').text("Dealer wins: "+ dealerWins);
+        $('.ties').text("Ties: "+ties);
     }
     //removes score display
     var removeScore = function(){
         $('.player-score').text('');
         $('.dealer-score').text('');
         $('.end-message').text('');
+        $('.player-wins').text("");
+        $('.dealer-wins').text("");
+        $('.ties').text("");
     }
 
     //hides hit and stand buttons
@@ -190,8 +194,7 @@
         shuffleDeck(initialDeck);
         $('.play').show();
         $('.play-again').hide();
-        console.log("player wins: "+playerWins, "dealer wins: "+dealerWins, "ties: "+ties);
-    }
+  }
 
 
     $('.play').click(initialDeal);
