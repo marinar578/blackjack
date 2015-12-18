@@ -42,7 +42,16 @@ div.game-space {
 
 
 
-.play{
+.play {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    margin-right:  auto;
+    margin-left: auto;
+    background: url('images/suits.png') no-repeat center;
+    animation: bounceIn 5s;
+    cursor: pointer;
+    background-color: black;
 }
 
 .player-hand{}
@@ -126,11 +135,11 @@ div.game-space {
 @keyframes bounceIn{
     0%{
         transform: scale(0);
-        opacity: 0;
+        opacity: 1;
 
     }
-    50%{
-        transform: scale(3);
+    30%{
+        transform: scale(6);
         opacity: 1;      
 
     }
