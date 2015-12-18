@@ -174,9 +174,10 @@
     //serve out first four cards of the game
     var initialDeal = function(){
         deal("dealer"); deal("player"); deal("dealer"); deal("player");        
+        $('.decks').show();
         $('.hit').show()
         $('.stand').show()
-        $('.play').hide();
+        $('.play-area').remove();
      }
 
     //start the game with the play button, but hide the hit and stand buttons initially
@@ -184,6 +185,7 @@
         hideButtons();
         shuffleDeck(initialDeck);
         $('.play').show().click(initialDeal);
+        $('.decks').hide();
     }
     playGame();
 

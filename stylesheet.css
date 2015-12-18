@@ -28,9 +28,10 @@ div.container{
 }
 
 div.game-space {
-    padding-top: 20px;
+    padding-top: 50px;
     padding-bottom: 50px;
     background-color:  green;
+    background: radial-gradient(ellipse, green, navy);
 }
 
 .decks{
@@ -41,17 +42,31 @@ div.game-space {
 }
 
 
-
-.play {
-    height: 100px;
-    width: 100px;
+.play-area {
+    position: relative;
+    width: 80%;
+    height: 340px;
+    padding-top: 5px;
     text-align: center;
     margin-right:  auto;
     margin-left: auto;
-    background: url('images/suits.png') no-repeat center;
-    animation: bounceIn 5s;
+    border-radius: 10px;
+}
+
+.play {
+    position: relative;
+    width: 20%;
+    top: 20%;
+    margin-right:  auto;
+    margin-left: auto;
+    display: block;
+    padding-top: 15px;
+    border-radius: 10px;
     cursor: pointer;
-    background-color: black;
+}
+
+.play:hover{
+    text-shadow: 0 0 3px red;
 }
 
 .player-hand{}
@@ -80,7 +95,6 @@ div.game-space {
 
 .dealer-card{
     width: 65px;
-/*    display: inline-block;*/
 }
 
 .btn{
@@ -88,7 +102,6 @@ div.game-space {
     width: 30%;
     left:50%;
     padding: 20px 20px 0px 20px;
-/*    border: dotted 1pt yellow;*/
     border-radius: 10px;
     font-size: 20pt;
     cursor: pointer;
@@ -96,22 +109,16 @@ div.game-space {
 }
 
 .btn:hover{
-    background-color: gold;
-    color: green;
-    opacity: .9;
+    background-color: black;
+    color: gold;
 }
 
 .hit{
     position: relative;
-
-/*    left: 20%;
-    top: 20%;*/
-
 }
 
 .stand{
     position: relative;
-/*    left: 40%;*/
 }
 
 .scores{
@@ -129,21 +136,4 @@ div.game-space {
 
 .score.player-score{
     display: inline-block;
-}
-
-
-@keyframes bounceIn{
-    0%{
-        transform: scale(0);
-        opacity: 1;
-
-    }
-    30%{
-        transform: scale(6);
-        opacity: 1;      
-
-    }
-    100%{
-        transform: scale(1);
-    }
 }
