@@ -109,7 +109,9 @@
                 if (calcPoints(card)===11 && (playerPoints+11>21)){
                     playerPoints+=1;
                 } else if ((playerHand.indexOf(11) > -1) && (calcPoints(card)===11) && (playerPoints+11>21)){
-                    dealerPoints-=10;
+                    playerPoints-=10;
+                } else if ((playerHand.indexOf(11) > -1) && (playerPoints+calcPoints(card)>21)){
+                    playerPoints-=10;
                 } else {
                     playerPoints+=calcPoints(card);
                 }
@@ -199,6 +201,17 @@
 
     $('.play').click(initialDeal);
 
+    var resetHandsAndDeck = function(){
+        playerHand.forEach(function(el){
+            initialDeck.push(el);
+        });
+        dealerHand.forEach(function(el){
+            initialDeck.push(el);
+        });
+        playerHand=[];
+        dealerHand=[];
+    };
+
 
     var clearTable = function(){
         playerPoints = 0;
@@ -218,9 +231,9 @@
         $('#0').attr('src', sortedImages[dealerHand[0]]); 
         $('.play-again').show().click(function(){
             clearTable();
-            dealerHand = [];
+            resetHandsAndDeck();
             playGame();
-        })
+        });
 
     };
 
