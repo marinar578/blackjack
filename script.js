@@ -168,6 +168,7 @@
 
     //serve out first four cards of the game
     var initialDeal = function(){
+        shuffleDeck(initialDeck);
         deal("dealer");
         $('#0').attr('src', 'images/card_back.svg'); 
         deal("player"); deal("dealer"); deal("player");        
@@ -186,7 +187,6 @@
     $('.decks').hide();
     $('.play-again').hide();
     var playGame = function(){
-        shuffleDeck(initialDeck);
         $('.play').show();
         $('.play-again').hide();
   }
