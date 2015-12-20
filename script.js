@@ -1,6 +1,7 @@
 "use strict";
 
 // $(function () {
+
     console.log("doc ready");
 
     var cardImages = ["images/00_heart_K.svg", "images/14_diamond_A.svg", "images/28_club_2.svg", "images/42_spade_3.svg", "images/01_heart_A.svg", "images/15_diamond_2.svg", "images/29_club_3.svg", "images/43_spade_4.svg", "images/02_heart_2.svg", "images/16_diamond_3.svg", "images/30_club_4.svg", "images/44_spade_5.svg", "images/03_heart_3.svg", "images/17_diamond_4.svg", "images/31_club_5.svg", "images/45_spade_6.svg", "images/04_heart_4.svg", "images/18_diamond_5.svg", "images/32_club_6.svg", "images/46_spade_7.svg", "images/05_heart_5.svg", "images/19_diamond_6.svg", "images/33_club_7.svg", "images/47_spade_8.svg", "images/06_heart_6.svg", "images/20_diamond_7.svg", "images/34_club_8.svg", "images/48_spade_9.svg", "images/07_heart_7.svg", "images/21_diamond_8.svg", "images/35_club_9.svg", "images/49_spade_10.svg", "images/08_heart_8.svg", "images/22_diamond_9.svg", "images/36_club_10.svg", "images/50_spade_J.svg", "images/09_heart_9.svg", "images/23_diamond_10.svg", "images/37_club_J.svg", "images/51_spade_Q.svg", "images/10_heart_10.svg", "images/24_diamond_J.svg", "images/38_club_Q.svg", "images/11_heart_J.svg", "images/25_diamond_Q.svg", "images/39_spade_K.svg", "images/12_heart_Q.svg", "images/26_club_K.svg", "images/40_spade_A.svg", "images/13_diamond_K.svg", "images/27_club_A.svg", "images/41_spade_2.svg"];
@@ -19,33 +20,15 @@
 
     //use these to keep track of each player's hand as cards are dealt (for ace conditionals)
     var playerHand = [];
+      var playerValues = [];
     var dealerHand = [];
+        var dealerValues = [];
 
     //populates the original deck array
     for(var i=0; i<52; i++){
         initialDeck.push(i)
     };
 
-    // //0 = King, 1=Ace, 11=Jack, 12=Queen
-    // //will probably not need this
-    // var cardValue = function(card){
-    //     var value = card%13;
-    //     switch(value){
-    //         case 0:
-    //             value = "King";
-    //             break;
-    //         case 1:
-    //             value = "Ace";
-    //             break;
-    //         case 11:
-    //             value = "Jack";
-    //             break;
-    //         case 12:
-    //             value = "Queen";
-    //             break;
-    //     };
-    //     return value;
-    // }
 
     //calculates point value of a card
     //0 = King, 1=Ace, 11=Jack, 12=Queen, all other card values = their numbers
@@ -103,18 +86,87 @@
     var deal = function(player){
         // shuffleDeck(initialDeck);
         var card = initialDeck.pop();
+        var cardValue = calcPoints(card);
 
         if(player === "player"){
-                //changes ace value to 1 if necessary and adds appropriate amount to playerPoints
-                if (calcPoints(card)===11 && (playerPoints+11>21)){
-                    playerPoints+=1;
-                } else if ((playerHand.indexOf(11) > -1) && (calcPoints(card)===11) && (playerPoints+11>21)){
-                    playerPoints-=10;
-                } else if ((playerHand.indexOf(11) > -1) && (playerPoints+calcPoints(card)>21)){
-                    playerPoints-=10;
+                // //changes ace value to 1 if necessary and adds appropriate amount to playerPoints
+
+                if(playerPoints + calcPoints(card) > 21){
+                    if ((playerValues.indexOf(11) > -1) && (calcPoints(card)===11) && (playerPoints+11>21)){
+                        
+                        playerValues.push(1);
+                        var aceIndex = playerValues.indexOf(11)
+                        playerValues[aceIndex]=1;
+                        playerPoints = playerValues.reduce(function(prev,curr){return prev+curr});
+
+                    } else if (calcPoints(card)===11 && (playerPoints+11>21)){
+                        playerPoints+=1;
+                        playerValues.push(1);
+                    } else if ((playerValues.indexOf(11) > -1)){
+
+                        playerValues.push(calcPoints(card));
+                        var aceIndex = playerValues.indexOf(11)
+                        playerValues[aceIndex]=1;
+                        playerPoints = playerValues.reduce(function(prev,curr){return prev+curr});
+                    }  else {
+                        playerPoints+=calcPoints(card);
+                        playerValues.push(calcPoints(card));
+                    }              
                 } else {
                     playerPoints+=calcPoints(card);
+                    playerValues.push(calcPoints(card));
                 }
+
+                // var ace = 0;
+                // var aceIndex = [];
+                // playerValues.forEach(function(el, index){ 
+                //     if(el===11){
+                //         ace+=1;
+                //         aceIndex.push(index);
+                //     }; 
+                // });
+
+                // // if( playerPoints + cardValue > 21 ){
+                // //     if( aceIndex.length > 0 ){
+
+                // //          playerHand[aceIndex[aceIndex.length-1]]="ace";
+                // //          playerPoints -=10;
+
+
+
+
+                // //     }
+                // // }
+
+
+                // if ( playerPoints + cardValue > 21 ) {
+                //     if (cardValue===11) {
+                //         playerPoints += 1;
+                //         playerValues.push("ace");
+                //         var temp = ace;
+
+                //             if (playerPoints + cardValue > 21 && temp>0 ){
+                //                 // aceIndex.forEach(function(el){
+                //                 //     playerValues[el]="ace";
+                //                 // })
+
+                //                 playerPoints-=10;
+                //                 temp=0;
+                //             };                       
+                //     } else {
+                //         playerPoints+=cardValue;
+                //         playerValues.push(cardValue);
+                //         var temp = ace;
+                //         if (playerPoints + cardValue> 21 && temp>0 ){
+                //             playerPoints-=10;
+                //             temp=0;
+                //         }
+                //     };
+                // } else {
+                //     playerPoints+=cardValue;
+                //     playerValues.push(cardValue);
+                // }
+
 
                 // //creates new player-card div, adds text to new div describing card that was dealt and shows player score
                 // var playerCardTxt = $('<div class="playerCard">');
@@ -128,15 +180,68 @@
 
                 playerHand.push(card);
 
+
         } else if (player === "dealer"){
-                //changes ace value to 1 if necessary and adds appropriate amount to dealerPoints
-                if (calcPoints(card)===11 && (dealerPoints+11>21)){
-                    dealerPoints+=1;
-                } else if ((dealerHand.indexOf(11)> -1) && (calcPoints(card)===11) && (dealerPoints+11>21)){
-                    dealerPoints-=10;
+                // //changes ace value to 1 if necessary and adds appropriate amount to dealerPoints
+                // if (calcPoints(card)===11 && (dealerPoints+11>21)){
+                //     dealerPoints+=1;
+                // } else if ((dealerHand.indexOf(11)> -1) && (calcPoints(card)===11) && (dealerPoints+11>21)){
+                //     dealerPoints-=10;
+                // } else {
+                //     dealerPoints+=calcPoints(card);
+                // };
+                if(dealerPoints + calcPoints(card) > 21){
+                    if ((dealerValues.indexOf(11) > -1) && (calcPoints(card)===11) && (dealerPoints+11>21)){
+                        
+                        dealerValues.push(1);
+                        var aceIndex = dealerValues.indexOf(11)
+                        dealerValues[aceIndex]=1;
+                        dealerPoints = dealerValues.reduce(function(prev,curr){return prev+curr});
+
+                    } else if (calcPoints(card)===11 && (dealerPoints+11>21)){
+                        dealerPoints+=1;
+                        dealerValues.push(1);
+                    } else if ((dealerValues.indexOf(11) > -1)){
+
+                        dealerValues.push(calcPoints(card));
+                        var aceIndex = dealerValues.indexOf(11)
+                        dealerValues[aceIndex]=1;
+                        dealerPoints = dealerValues.reduce(function(prev,curr){return prev+curr});
+                    }  else {
+                        dealerPoints+=calcPoints(card);
+                        dealerValues.push(calcPoints(card));
+                    }              
                 } else {
                     dealerPoints+=calcPoints(card);
-                };
+                    dealerValues.push(calcPoints(card));
+                }
+
+                // var ace = 0;
+                // dealerValues.forEach(function(el){ 
+                //     if(el===11){
+                //         ace+=1;
+                //     }; 
+                // });
+
+                // if ( dealerPoints + cardValue > 21 ) {
+                //     if (cardValue===11) {
+                //         dealerPoints += 1;
+                //         dealerValues.push(cardValue);
+                //         while (dealerPoints > 21 && ace>0 ){
+                //             dealerPoints-=10;
+                //             ace-=1;
+                //         }                        
+                //     } else {
+                //         dealerPoints+=cardValue;
+                //         dealerValues.push(cardValue);
+                //         while (dealerPoints > 21 && ace>0 ){
+                //             dealerPoints-=10;
+                //             ace-=1;
+                //         }
+                //     };
+                // } else {
+                //     dealerPoints+=cardValue;
+                // }
 
                 // //creates new dealer-card div, adds text to it and shows dealer score
                 // var dealerCardTxt = $('<div class="dealerCard">');
@@ -210,6 +315,8 @@
         });
         playerHand=[];
         dealerHand=[];
+        playerValues=[];
+        dealerValues=[];
     };
 
 
