@@ -70,18 +70,15 @@
         if(player === "player"){
                 // //changes ace value to 1 if necessary and adds appropriate amount to playerPoints
                 if(playerPoints + calcPoints(card) > 21){
-                    if ((playerValues.indexOf(11) > -1) && (calcPoints(card)===11) && (playerPoints+11>21)){
-                        
+                    if ((playerValues.indexOf(11) > -1) && (calcPoints(card)===11) && (playerPoints+11>21)){                       
                         playerValues.push(1);
                         var aceIndex = playerValues.indexOf(11)
                         playerValues[aceIndex]=1;
                         playerPoints = playerValues.reduce(function(prev,curr){return prev+curr});
-
                     } else if (calcPoints(card)===11 && (playerPoints+11>21)){
                         playerPoints+=1;
                         playerValues.push(1);
                     } else if ((playerValues.indexOf(11) > -1)){
-
                         playerValues.push(calcPoints(card));
                         var aceIndex = playerValues.indexOf(11)
                         playerValues[aceIndex]=1;
@@ -106,18 +103,15 @@
         } else if (player === "dealer"){
                 // //changes ace value to 1 if necessary and adds appropriate amount to dealerPoints
                 if(dealerPoints + calcPoints(card) > 21){
-                    if ((dealerValues.indexOf(11) > -1) && (calcPoints(card)===11) && (dealerPoints+11>21)){
-                        
+                    if ((dealerValues.indexOf(11) > -1) && (calcPoints(card)===11) && (dealerPoints+11>21)){                        
                         dealerValues.push(1);
                         var aceIndex = dealerValues.indexOf(11)
                         dealerValues[aceIndex]=1;
                         dealerPoints = dealerValues.reduce(function(prev,curr){return prev+curr});
-
                     } else if (calcPoints(card)===11 && (dealerPoints+11>21)){
                         dealerPoints+=1;
                         dealerValues.push(1);
                     } else if ((dealerValues.indexOf(11) > -1)){
-
                         dealerValues.push(calcPoints(card));
                         var aceIndex = dealerValues.indexOf(11)
                         dealerValues[aceIndex]=1;
@@ -170,7 +164,7 @@
     var initialDeal = function(){
         shuffleDeck(initialDeck);
         deal("dealer");
-        $('#0').attr('src', 'images/card_back.svg'); 
+        $('#0').attr('src', 'images/suits_back.png'); 
         deal("player"); deal("dealer"); deal("player");        
         $('.decks').show();
         $('.hit').show();
