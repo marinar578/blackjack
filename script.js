@@ -175,6 +175,7 @@
         $('.hit').show();
         $('.stand').show();
         $('.play').hide();
+        $('.play-again').hide();
         if (playerPoints===21){
             $('.hit').hide();
         };
