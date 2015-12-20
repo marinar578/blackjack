@@ -29,7 +29,6 @@
         initialDeck.push(i)
     };
 
-
     //calculates point value of a card
     //0 = King, 1=Ace, 11=Jack, 12=Queen, all other card values = their numbers
     var calcPoints = function(card){
@@ -51,26 +50,6 @@
         return pointValue;
     }
 
-    //0=hearts, 1=diamonds, 2=clubs, 3=spades
-    var cardSuit = function(card){
-        var suit = Math.floor(card/13);
-        switch(suit){
-            case 0:
-                suit = "hearts";
-                break;
-            case 1:
-                suit = "diamonds";
-                break;
-            case 2:
-                suit = "clubs";
-                break;
-            case 3:
-                suit = "spades"
-                break;
-        }
-        return suit;
-    }
-
     //shuffles deck
     var shuffleDeck = function(deck) {
         for (var i = deck.length - 1; i > 0; i--) {
@@ -84,13 +63,12 @@
 
     //deals cards from shuffled deck and returns array of [card point value, card name, card suit]
     var deal = function(player){
-        // shuffleDeck(initialDeck);
+
         var card = initialDeck.pop();
         var cardValue = calcPoints(card);
 
         if(player === "player"){
                 // //changes ace value to 1 if necessary and adds appropriate amount to playerPoints
-
                 if(playerPoints + calcPoints(card) > 21){
                     if ((playerValues.indexOf(11) > -1) && (calcPoints(card)===11) && (playerPoints+11>21)){
                         
@@ -117,62 +95,6 @@
                     playerValues.push(calcPoints(card));
                 }
 
-                // var ace = 0;
-                // var aceIndex = [];
-                // playerValues.forEach(function(el, index){ 
-                //     if(el===11){
-                //         ace+=1;
-                //         aceIndex.push(index);
-                //     }; 
-                // });
-
-                // // if( playerPoints + cardValue > 21 ){
-                // //     if( aceIndex.length > 0 ){
-
-                // //          playerHand[aceIndex[aceIndex.length-1]]="ace";
-                // //          playerPoints -=10;
-
-
-
-
-                // //     }
-                // // }
-
-
-                // if ( playerPoints + cardValue > 21 ) {
-                //     if (cardValue===11) {
-                //         playerPoints += 1;
-                //         playerValues.push("ace");
-                //         var temp = ace;
-
-                //             if (playerPoints + cardValue > 21 && temp>0 ){
-                //                 // aceIndex.forEach(function(el){
-                //                 //     playerValues[el]="ace";
-                //                 // })
-
-                //                 playerPoints-=10;
-                //                 temp=0;
-                //             };                       
-                //     } else {
-                //         playerPoints+=cardValue;
-                //         playerValues.push(cardValue);
-                //         var temp = ace;
-                //         if (playerPoints + cardValue> 21 && temp>0 ){
-                //             playerPoints-=10;
-                //             temp=0;
-                //         }
-                //     };
-                // } else {
-                //     playerPoints+=cardValue;
-                //     playerValues.push(cardValue);
-                // }
-
-
-                // //creates new player-card div, adds text to new div describing card that was dealt and shows player score
-                // var playerCardTxt = $('<div class="playerCard">');
-                // $('.player-hand').append(playerCardTxt);
-                // playerCardTxt.text(cardValue(card) + " of " + cardSuit(card));     
-
                 //creates new player-card img of dealt card
                 var playerCard = $('<img class="player-card">');
                 $('.player-hand').append(playerCard);
@@ -183,13 +105,6 @@
 
         } else if (player === "dealer"){
                 // //changes ace value to 1 if necessary and adds appropriate amount to dealerPoints
-                // if (calcPoints(card)===11 && (dealerPoints+11>21)){
-                //     dealerPoints+=1;
-                // } else if ((dealerHand.indexOf(11)> -1) && (calcPoints(card)===11) && (dealerPoints+11>21)){
-                //     dealerPoints-=10;
-                // } else {
-                //     dealerPoints+=calcPoints(card);
-                // };
                 if(dealerPoints + calcPoints(card) > 21){
                     if ((dealerValues.indexOf(11) > -1) && (calcPoints(card)===11) && (dealerPoints+11>21)){
                         
@@ -216,38 +131,6 @@
                     dealerValues.push(calcPoints(card));
                 }
 
-                // var ace = 0;
-                // dealerValues.forEach(function(el){ 
-                //     if(el===11){
-                //         ace+=1;
-                //     }; 
-                // });
-
-                // if ( dealerPoints + cardValue > 21 ) {
-                //     if (cardValue===11) {
-                //         dealerPoints += 1;
-                //         dealerValues.push(cardValue);
-                //         while (dealerPoints > 21 && ace>0 ){
-                //             dealerPoints-=10;
-                //             ace-=1;
-                //         }                        
-                //     } else {
-                //         dealerPoints+=cardValue;
-                //         dealerValues.push(cardValue);
-                //         while (dealerPoints > 21 && ace>0 ){
-                //             dealerPoints-=10;
-                //             ace-=1;
-                //         }
-                //     };
-                // } else {
-                //     dealerPoints+=cardValue;
-                // }
-
-                // //creates new dealer-card div, adds text to it and shows dealer score
-                // var dealerCardTxt = $('<div class="dealerCard">');
-                // $('.dealer-hand').append(dealerCardTxt);
-                // dealerCardTxt.text(cardValue(card) + " of " + cardSuit(card));
-
                 //creates new dealer-card img of dealt card
                 dealerHand.push(card);
                 var dealerCard = $('<img class="dealer-card" id="'+dealerHand.indexOf(card)+'">');
@@ -266,6 +149,7 @@
         $('.dealer-wins').text("Dealer wins: "+ dealerWins);
         $('.ties').text("Ties: "+ties);
     }
+
     //removes score display
     var removeScore = function(){
         $('.player-score').text('');
@@ -291,6 +175,9 @@
         $('.hit').show();
         $('.stand').show();
         $('.play').hide();
+        if (playerPoints===21){
+            $('.hit').hide();
+        };
      }
 
     //start the game with the play button, but hide the hit and stand buttons initially
@@ -339,17 +226,15 @@
         $('.play-again').show().click(function(){
             clearTable();
             resetHandsAndDeck();
-            playGame();
+            initialDeal();
         });
 
     };
 
-
-    if (playerPoints===21){
-        $('.hit').hide();
-    };
-
     $('.hit').click(function(){
+        if (playerPoints===21){
+            $('.hit').hide();
+        };
             deal("player");
             if(playerPoints>21){
                 $('.end-message').text("Player busts, dealer wins");
@@ -357,7 +242,6 @@
                 endOfGame();
             }
     });
-
 
 
     $('.stand').click(function(){
@@ -382,7 +266,6 @@
             ties+=1;
             endOfGame();
         };
-
 
 
     });
