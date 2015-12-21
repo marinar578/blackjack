@@ -27,6 +27,7 @@ You can win a round of Blackjack in the following ways:
 - If neither bust (exceed 21), the dealer and the player compare points to determine the winner of the round.
 
 #### In this Verison:
+- Each round starts with a full, reshuffled deck.
 - Choose to hit or stand until you reach 21 points! 
 - Your points and the dealer's points are revealed at the end of each round, on the bottom-left corner of the screen.
 - Try to get more wins than the dealer! Wins and ties can be seen on the bottom-right corner at the end of each round.
