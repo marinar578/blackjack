@@ -1,8 +1,6 @@
 # PROJECT 1: BLACKJACK
 
-### Blackjack
-
-Play BlackJack, the most widely played casino banking game in the world!!
+### Play BlackJack, the most widely played casino banking game in the world!!
 ![dog playing cards](http://img0.joyreactor.com/pics/post/auto-dog-animals-poker-346420.jpeg "dog")
 
 > Also known as twenty-one,  Blackjack is a comparing card game between a player and dealer, meaning players compete against the dealer but not against other players. It is played with a deck of 52 cards.
