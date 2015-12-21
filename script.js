@@ -1,6 +1,6 @@
 "use strict";
 
-// $(function () {
+$(function () {
 
     console.log("doc ready");
 
@@ -261,19 +261,5 @@
 
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
-// });
+});
