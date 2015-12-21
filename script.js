@@ -227,9 +227,6 @@
     };
 
     $('.hit').click(function(){
-        if (playerPoints===21){
-            $('.hit').hide();
-        };
             deal("player");
             if(playerPoints>21){
                 $('.end-message').text("Player busts, dealer wins");

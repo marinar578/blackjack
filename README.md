@@ -22,6 +22,7 @@ You can win a round of Blackjack in the following ways:
 #### Hit or Stand:
 - The dealer and the player are dealt two initial cards
 - The player has a choice to hit or stand. The player will be dealt a new card each time he or she "hits". The goal is to get as close to 21 points without going over (or, ideally, to get to 21 points!).
+- The hit button is hidden if the initial deal lands the player with a blackjack hand (any 10-point card and an Ace).
 - If the player is satisfied with his or her hand, the player can choose to stand. At this point, the dealer is dealt a card until he or she reaches 17 points.
 - If neither bust (exceed 21), the dealer and the player compare points to determine the winner of the round.
 
