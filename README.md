@@ -41,5 +41,5 @@ I hope to improve the game in the future with a few new features:
 
 ##### Image Credits:
 
--I used svg image files of [playing cards from wikimedia commons](
+- I used svg image files of [playing cards from wikimedia commons](
 https://commons.wikimedia.org/wiki/Category:SVG_playing_cards_2); image credit: GFDL (C. Burnett)
