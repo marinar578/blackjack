@@ -10,8 +10,6 @@ html {
 }
 
 body{
-/*    height: 80%;
-    width: 80%;*/
     left: 10%;
     background-color:  green;
     color: yellow;
@@ -32,8 +30,6 @@ div.game-space {
     height: 100%;
     margin-left:auto;
     margin-right:auto;
-/*    padding-top: 50px;
-    padding-bottom: 50px;*/
 }
 
 .decks{
