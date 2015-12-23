@@ -22,7 +22,7 @@ You can win a round of Blackjack in the following ways:
 - The player has a choice to hit or stand. The player will be dealt a new card each time he or she "hits". The goal is to get as close to 21 points without going over (or, ideally, to get to 21 points!).
 - The hit button is hidden if the initial deal lands the player with a blackjack hand (any 10-point card and an Ace).
 - If the player is satisfied with his or her hand, the player can choose to stand. At this point, the dealer is dealt a card until he or she reaches 17 points.
-- If neither bust (exceed 21), the dealer and the player compare points to determine the winner of the round.
+- If neither busts (exceeds 21), the dealer and the player compare points to determine the winner of the round.
 
 #### In this Verison:
 - Each round starts with a full, reshuffled deck.
@@ -38,3 +38,8 @@ I hope to improve the game in the future with a few new features:
 - Added sound effects to accompany the animations;
 - Betting options depending on table odds;
 - Allowing multiple users to play simultaneously against one another.
+
+##### Image Credits:
+
+-I used svg image files of [playing cards from wikimedia commons](
+https://commons.wikimedia.org/wiki/Category:SVG_playing_cards_2); image credit: GFDL (C. Burnett)
